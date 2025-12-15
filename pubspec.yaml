@@ -40,6 +40,12 @@ dependencies:
   
   # Hooks for Flutter
   flutter_hooks: ^0.21.3+1
+  
+  # Hooks + Riverpod combination
+  hooks_riverpod: ^2.6.1
+  
+  # Credential Manager for secure credential storage
+  credential_manager: ^2.0.8
 
 dev_dependencies:
   flutter_test:
