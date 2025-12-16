@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.developer.associated-domains</key>
+	<array>
+		<!-- 本番環境: 実際のドメインに置き換えてください -->
+		<!-- <string>webcredentials:your-domain.com</string> -->
+		
+		<!-- テスト用: ローカル開発では不要ですが、実機テストには必要 -->
+	</array>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>$(AppIdentifierPrefix)com.example.flutterExperiments</string>
+	</array>
+</dict>
+</plist>

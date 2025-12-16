@@ -8,9 +8,16 @@ void main() async {
   
   final credentialManager = CredentialManager();
   if (credentialManager.isSupportedPlatform) {
-    await credentialManager.init(
-      preferImmediatelyAvailableCredentials: true,
-    );
+    try {
+      await credentialManager.init(
+        preferImmediatelyAvailableCredentials: false, // ダイアログを表示するためにfalseに変更
+      );
+      print('Credential Manager initialized successfully');
+    } catch (e) {
+      print('Credential Manager initialization failed: $e');
+    }
+  } else {
+    print('Credential Manager is not supported on this platform');
   }
   
   runApp(
@@ -152,14 +159,22 @@ class PasswordRegisterScreen extends HookConsumerWidget {
                       isLoading.value = true;
                       
                       try {
+                        print('Attempting to save password credentials...');
                         // credential_managerを使ってパスワードを保存
                         final credentialManager = CredentialManager();
+                        
+                        // デバッグ情報
+                        print('Platform supported: ${credentialManager.isSupportedPlatform}');
+                        print('GMS available: ${credentialManager.isGmsAvailable}');
+                        
                         final credential = PasswordCredential(
                           username: userIdController.text,
                           password: passwordController.text,
                         );
                         
+                        print('Saving credential for user: ${userIdController.text}');
                         await credentialManager.savePasswordCredentials(credential);
+                        print('Credential saved successfully!');
                         
                         if (context.mounted) {
                           ScaffoldMessenger.of(context).showSnackBar(
@@ -344,13 +359,21 @@ class PasswordUpdateScreen extends HookConsumerWidget {
                       isLoading.value = true;
                       
                       try {
+                        print('Attempting to update password credentials...');
                         final credentialManager = CredentialManager();
+                        
+                        // デバッグ情報
+                        print('Platform supported: ${credentialManager.isSupportedPlatform}');
+                        print('GMS available: ${credentialManager.isGmsAvailable}');
+                        
                         final newCredential = PasswordCredential(
                           username: userIdController.text,
                           password: passwordController.text,
                         );
                         
+                        print('Updating credential for user: ${userIdController.text}');
                         await credentialManager.savePasswordCredentials(newCredential);
+                        print('Credential updated successfully!');
                         
                         if (context.mounted) {
                           ScaffoldMessenger.of(context).showSnackBar(
